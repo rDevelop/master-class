@@ -1,39 +1,29 @@
 package us.rlit.arrays;
 
 
+import java.util.Arrays;
+
 public class ReverseArrayChallenge {
 
     public static void main(String[] args) {
 
         int[] array = new int[]{10,20,30,40,50};
         System.out.println("array:");
-        for(int i: array) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+        System.out.println(Arrays.toString(array));
         reverse(array);
         System.out.println("reversed:");
-        for(int i: array) {
-            System.out.print(i + " ");
-        }
-
+        System.out.println(Arrays.toString(array));
 
         System.out.println();
         System.out.println();
+
         System.out.println("Udemy solution");
         System.out.println("array:");
         array = new int[]{10,20,30,40,50};
-        for(int i: array) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+        System.out.println(Arrays.toString(array));
         reverse2(array);
         System.out.println("reversed2:");
-        for(int i: array) {
-            System.out.print(i + " ");
-        }
-
-
+        System.out.println(Arrays.toString(array));
 
     }
 
@@ -43,6 +33,7 @@ public class ReverseArrayChallenge {
         int halfLength = arr.length / 2;
         for(int i=0; i<halfLength; i++) {
             int tmp = arr[i];
+            arr[i] = arr[maxIndex -i];
             arr[maxIndex -1 ] = tmp;
         }
     }
