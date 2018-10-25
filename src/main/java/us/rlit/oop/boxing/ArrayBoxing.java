@@ -35,7 +35,15 @@ public class ArrayBoxing {
             iArrayList.add(Integer.valueOf(i));
         }
 
-        System.out.println(iArrayList);
+
+        for(int i=0; i <=10; i++) {
+
+            /*
+            Unboxing
+             */
+            System.out.println(i + " --> "  + iArrayList.get(i).intValue());
+        }
+
 
 
 
