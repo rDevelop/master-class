@@ -1,4 +1,4 @@
-package us.rlit.arrays.challenge;
+package us.rlit.arrays.challenge.mobilephone;
 
 public class MobilePhoneApp {
 

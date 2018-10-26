@@ -1,4 +1,4 @@
-package us.rlit.oop.boxing;
+package us.rlit.arrays.boxing;
 
 import java.util.ArrayList;
 
@@ -43,6 +43,15 @@ public class ArrayBoxing {
              */
             System.out.println(i + " --> "  + iArrayList.get(i).intValue());
         }
+
+        /// Short way
+        // at compile time it auto boxes this for us
+        Integer myIntValue = 56;
+        Double myDoubleVal = 54_0.9;
+        // unboxing at compile time.
+        int myInt = myIntValue.intValue();
+
+
 
 
 
