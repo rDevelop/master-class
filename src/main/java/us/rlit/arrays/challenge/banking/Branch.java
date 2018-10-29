@@ -12,57 +12,54 @@ public class Branch {
     private String name;
     private ArrayList<Customer> customers = new ArrayList<>();
 
-    public Branch() {
-        this.name = "New Branch";
-    }
-
     public Branch(String name) {
         this.name = name;
     }
 
-    private Boolean customerExists(Customer customer) {
-        if (customers.contains(customer)) {
-            return true;
-        }
-        return false;
-    }
-
-    private Boolean addCustomer(Customer customer) {
-        if (customerExists(customer)) {
-            return false;
-        }
-        return customers.add(customer);
-    }
-
-    public Boolean addTransaction(String customerName, double transaction) {
-        Customer c = new Customer(customerName);
-        if (!customerExists(c)) {
-            addCustomer(c);
+    private Customer addCustomer(String customer) {
+        Customer newCustomer = new Customer(customer);
+        if (customers.add(newCustomer)) {
+            return newCustomer;
         } else {
-            c = customers.get(customers.indexOf(c));
+            return null;
         }
-        if( c.addTransaction(transaction) ) {
-            System.out.println(transaction + " applied to " + c.getName() + "'s account");
-        }  else {
-            System.out.println(transaction + " was not applied to " + c.getName() + "'s account. status: " + c.getStatus());
+    }
 
+    public boolean addTransaction(String customerName, double transaction) {
+        Customer c = findCustomer(customerName);
+        if (c == null) {
+            c = addCustomer(customerName);
         }
+
+        if (c.addTransaction(transaction)) {
+            System.out.println(transaction + " applied to " + c.getName() + "'s account");
+        }
+
         return true;
+    }
+
+    private Customer findCustomer(String name) {
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getName() == name) {
+                return customers.get(i);
+            }
+        }
+        return null;
+
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void printCustomers(Boolean showTransactions) {
         String caption = showTransactions ? name + " customers and transactions:" : name + " customers:";
-        System.out.println("\n\n"+ caption);
+        System.out.println("\n\n" + caption);
         for (int i = 0; i < customers.size(); i++) {
-            System.out.println(customers.get(i).getName());
+            System.out.println(customers.get(i).getName()
+                    + " Account status: " + customers.get(i).getStatus()
+                    + " Account Balance: " + customers.get(i).getAccountTotal());
             if (showTransactions) {
                 ArrayList<Double> trans = customers.get(i).getTransactions();
                 for (int j = 0; j < trans.size(); j++) {
@@ -73,10 +70,5 @@ public class Branch {
                 }
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }

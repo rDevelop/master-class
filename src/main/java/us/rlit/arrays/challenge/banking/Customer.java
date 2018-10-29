@@ -1,7 +1,6 @@
 package us.rlit.arrays.challenge.banking;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * The Customer class should have an arraylist of Doubles (transactions)
@@ -18,25 +17,20 @@ public class Customer {
         this.name = name;
     }
 
-    public Customer(String name, double transaction) {
-        this.name = name;
-        addTransaction(transaction);
-    }
-
-    public Boolean addTransaction(double transaction) {
+    public boolean addTransaction(double transaction) {
         // unboxing total
-        if( accountTotal + transaction < 0) {
+        accountTotal += transaction;
+        if (accountTotal < 0) {
             status = "Insufficient Funds";
+        } else {
+            status = "Good Standing";
+        }
+        // boxing total
+        if (transactions.add(transaction)) {
+            return true;
+        } else {
             return false;
         }
-        // boxing
-        if(transactions.add(transaction)) {
-            accountTotal += transaction;
-            status = "Good Standing";
-            return true;
-        }
-        status = "Unknown Error";
-        return false;
     }
 
     public String getName() {
@@ -51,24 +45,8 @@ public class Customer {
         return status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(getName(), customer.getName());
+    public Double getAccountTotal() {
+        return accountTotal;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName());
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "name='" + name + '\'' +
-                ", transactions=" + transactions +
-                '}';
-    }
 }

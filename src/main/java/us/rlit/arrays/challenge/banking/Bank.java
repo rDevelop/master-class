@@ -12,43 +12,44 @@ import java.util.ArrayList;
  */
 public class Bank {
 
+    private String name;
     private ArrayList<Branch> branches = new ArrayList<>();
 
-    public boolean addBranch(Branch branch) {
-        return branches.add(branch);
+    public Bank(String name) {
+        this.name = name;
     }
 
-    public static void main(String[] args) {
-        Bank bank = new Bank();
-        Branch branch = new Branch("South Branch");
-        Branch b2 = new Branch("Chicago South");
-        bank.addBranch(branch);
-        bank.addBranch(b2);
+    public boolean addTransaction(String branch, String customer, double transaction) {
+        Branch thisBranch = findBranch(branch);
+
+        if (branch != null) {
+            thisBranch.addTransaction(customer, transaction);
+            return true;
+        }
+        System.out.println(branch + " does't exist.");
 
 
-        //todo could make a terminal input with menus to generate similar sequence of transactions.
+        return false;
+    }
 
-        branch.addTransaction("Rob", 1_000.0);
-        branch.addTransaction("Rob", 100.0);
-        branch.addTransaction("Rob", 200014);
-        branch.addTransaction("Pete", 3_000.0);
-        branch.addTransaction("Pete", 300014);
-        branch.addTransaction("Robert", 300.0);
-        branch.addTransaction("Joe", -100.0);
-        branch.addTransaction("Joe", 1.0);
-        branch.addTransaction("Joe", -.2);
-        branch.addTransaction("Joe", -20);
+    private Branch findBranch(String name) {
+        for (int i = 0; i < branches.size(); i++) {
+            if (branches.get(i).getName() == name) {
+                return branches.get(i);
+            }
+        }
+        return null;
+    }
 
+    public boolean addBranch(String name) {
+        if (findBranch(name) != null) {
+            System.out.println(name + " already exists.");
+            return false;
+        }
+        return branches.add(new Branch(name));
+    }
 
-        b2.addTransaction("Rob", 1_000.0);
-        b2.addTransaction("Robert", 300.0);
-        b2.addTransaction("Joe", -100.0);
-        b2.addTransaction("Joe", -20);
-
-
-        bank.branches.forEach(
-                b -> {b.printCustomers(true);}
-        );
-
+    public ArrayList<Branch> getBranches() {
+        return branches;
     }
 }
