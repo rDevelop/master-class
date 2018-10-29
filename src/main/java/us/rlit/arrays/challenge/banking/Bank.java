@@ -32,6 +32,10 @@ public class Bank {
         return false;
     }
 
+    public void listCustomers(String branch, boolean showTransactions) {
+        findBranch(branch).printCustomers(showTransactions);
+    }
+
     private Branch findBranch(String name) {
         for (int i = 0; i < branches.size(); i++) {
             if (branches.get(i).getName() == name) {
@@ -41,15 +45,18 @@ public class Bank {
         return null;
     }
 
+    public void listAllBranchesCustomers(boolean showTransactions) {
+        // print all branches
+        branches.forEach(
+                b -> b.printCustomers(showTransactions)
+        );
+    }
+
     public boolean addBranch(String name) {
         if (findBranch(name) != null) {
             System.out.println(name + " already exists.");
             return false;
         }
         return branches.add(new Branch(name));
-    }
-
-    public ArrayList<Branch> getBranches() {
-        return branches;
     }
 }

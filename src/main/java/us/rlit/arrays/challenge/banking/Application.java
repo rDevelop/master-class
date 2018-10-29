@@ -42,10 +42,10 @@ public class Application {
         bank.addTransaction("Elgin Savings", "Joe", -18.01);
         bank.addTransaction("Elgin Savings", "Joe", 16.05);
 
+        bank.listCustomers("Elgin Savings", true);
+        bank.listCustomers("South Branch", false);
 
-        bank.getBranches().forEach(
-                b -> b.printCustomers(true)
-        );
+        bank.listAllBranchesCustomers(true);
 
     }
 }
