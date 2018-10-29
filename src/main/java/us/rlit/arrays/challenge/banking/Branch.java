@@ -16,19 +16,20 @@ public class Branch {
         this.name = name;
     }
 
-    private Customer addCustomer(String customer) {
-        Customer newCustomer = new Customer(customer);
-        if (customers.add(newCustomer)) {
-            return newCustomer;
-        } else {
-            return null;
+    public boolean addCustomer(String customer) {
+        Customer newCustomer = findCustomer(customer);
+        if( newCustomer == null) {
+            return customers.add(new Customer(customer));
         }
+        System.out.println("Customer already exists.");
+        return false;
     }
 
     public boolean addTransaction(String customerName, double transaction) {
         Customer c = findCustomer(customerName);
         if (c == null) {
-            c = addCustomer(customerName);
+            System.out.println("Can't find customer.");
+            return false;
         }
 
         if (c.addTransaction(transaction)) {

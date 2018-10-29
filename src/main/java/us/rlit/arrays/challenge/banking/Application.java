@@ -22,6 +22,11 @@ public class Application {
 
 
         //todo could make a terminal input with menus to generate similar sequence of transactions.
+        bank.addCustomer("South Branch", "Rob");
+        bank.addCustomer("South Branch", "Robert");
+        bank.addCustomer("South Branch", "Pete");
+        bank.addCustomer("South Branch", "Joe");
+
 
         bank.addTransaction("South Branch", "Rob", 1_000.0);
         bank.addTransaction("South Branch", "Rob", 100.0);
@@ -35,6 +40,12 @@ public class Application {
         bank.addTransaction("South Branch", "Joe", -20);
 
 
+        bank.addCustomer("Elgin Savings", "Rob");
+        bank.addCustomer("Elgin Savings", "Robert");
+        bank.addCustomer("Elgin Savings", "Joe");
+        bank.addCustomer("Elgin Savings", "Rob");
+        bank.addCustomer("Elgin Savings", "Tom");
+
         bank.addTransaction("Elgin Savings", "Rob", 1_000.0);
         bank.addTransaction("Elgin Savings", "Robert", 300.0);
         bank.addTransaction("Elgin Savings", "Joe", 102.0);
@@ -42,8 +53,10 @@ public class Application {
         bank.addTransaction("Elgin Savings", "Joe", -18.01);
         bank.addTransaction("Elgin Savings", "Joe", 16.05);
 
+        bank.addTransaction("Elgin Savings", "Tom", 1000);
+
         bank.listCustomers("Elgin Savings", true);
-        bank.listCustomers("South Branch", false);
+        bank.listCustomers("South Branches", false);
 
         bank.listAllBranchesCustomers(true);
 

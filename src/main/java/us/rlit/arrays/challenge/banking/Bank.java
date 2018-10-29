@@ -19,6 +19,16 @@ public class Bank {
         this.name = name;
     }
 
+    public boolean addCustomer(String branch, String customer) {
+        Branch b = findBranch(branch);
+        if( b == null) {
+            System.out.println("Branch " + branch + " doesn't exist.");
+            return false;
+        }
+        return b.addCustomer(customer);
+    }
+
+
     public boolean addTransaction(String branch, String customer, double transaction) {
         Branch thisBranch = findBranch(branch);
 
@@ -33,7 +43,12 @@ public class Bank {
     }
 
     public void listCustomers(String branch, boolean showTransactions) {
-        findBranch(branch).printCustomers(showTransactions);
+        Branch b = findBranch(branch);
+        if( b != null) {
+            b.printCustomers(showTransactions);
+        } else {
+            System.out.println("Branch " + branch + " doesn't exist.");
+        }
     }
 
     private Branch findBranch(String name) {
